@@ -5,14 +5,24 @@ import FormStep2 from "../components/FormStep2";
 import { Typography } from "@mui/material";
 
 export const Form = (props) => {
-  const formStep = (state) => state.form.step;
-  let stepContent;
+  //grab all of the state from props
+  const { formStep } = props;
+
+  //   console.log(formStep);
+
+  //declare function to return correct component
+  let StepContent = () => {};
+
   switch (formStep) {
     case 0:
-      stepContent = <FormStep1 />;
+      StepContent = () => {
+        return <FormStep1 />;
+      };
       break;
     case 1:
-      stepContent = <FormStep2 />;
+      StepContent = () => {
+        return <FormStep2 />;
+      };
       break;
     default:
       break;
@@ -24,13 +34,19 @@ export const Form = (props) => {
         The Form Steps/Components below should change when a user hits back or
         submit.
       </Typography>
-      <stepContent />
+      <StepContent />
     </>
   );
 };
 
-const mapStateToProps = (state) => ({});
+//set all of the state to props
+const mapStateToProps = (state) => ({
+  formStep: state.form.step,
+});
 
+//set dispatch actions to props
 const mapDispatchToProps = {};
 
+//connects a React component to a Redux store
+//https://react-redux.js.org/api/connect
 export default connect(mapStateToProps, mapDispatchToProps)(Form);
