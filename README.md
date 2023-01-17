@@ -1,3 +1,7 @@
+# A simple ReactJs App with Redux & Formik
+
+This project is to showcase how ReactJS works with Redux Slices and mapState and mapDispatch actions alongside Formik to create a simple way to build out and manage complex forms with global state.
+
 # Getting Started with Create React App and Redux
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
