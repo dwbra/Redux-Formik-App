@@ -1,26 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Typography, TextField, Button } from "@mui/material";
 import { Formik, Field, Form } from "formik";
 import * as yup from "yup";
-import { useSelector, useDispatch } from "react-redux";
 import { addFormData, setFormStep } from "../slices/FormSlice";
 
 export const FormStep1 = (props) => {
   //grab dispatch actions from props
-  const { addFormData, setFormStep } = props;
+  const { addFormData, setFormStep, currentStep, error } = props;
 
   const FirstStepSchema = yup.object().shape({
     firstName: yup.string().required(),
     lastName: yup.string().required(),
   });
-
-  const currentStep = useSelector((state) => state.form.step);
-
-  const error = useSelector((state) => state.form.error);
-
-  console.log(currentStep);
-  console.log(error);
 
   return (
     <>
@@ -37,14 +29,9 @@ export const FormStep1 = (props) => {
           addFormData(values);
           const newStep = currentStep + 1;
           setFormStep(newStep);
-          console.log(currentStep);
-
-          //   const data = { ...formData, ...values };
-          //   setFormData(data);
-          //   setActiveStepIndex(activeStepIndex + 1);
         }}
       >
-        {/* this type of return is called .... */}
+        {/* Render function */}
         {({ errors, touched, handleSubmit, handleChange, values }) => (
           <Form>
             <label htmlFor="firstName">First Name</label>
@@ -85,7 +72,12 @@ export const FormStep1 = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state, ownProps) => {
+  return {
+    currentStep: state.form.step,
+    error: state.form.error,
+  };
+};
 
 const mapDispatchToProps = { addFormData, setFormStep };
 

@@ -3,12 +3,15 @@ import { connect } from "react-redux";
 import FormStep1 from "../components/FormStep1";
 import FormStep2 from "../components/FormStep2";
 import { Typography } from "@mui/material";
+import FormComplete from "../components/FormComplete";
 
 export const Form = (props) => {
   //grab all of the state from props
-  const { formStep } = props;
+  const { formStep, formData } = props;
 
-  //   console.log(formStep);
+  //   useEffect(() => {
+  //     console.log(formData);
+  //   });
 
   //declare function to return correct component
   let StepContent = () => {};
@@ -24,13 +27,18 @@ export const Form = (props) => {
         return <FormStep2 />;
       };
       break;
+    case 2:
+      StepContent = () => {
+        return <FormComplete />;
+      };
+      break;
     default:
       break;
   }
 
   return (
     <>
-      <Typography align="center" variant="h1">
+      <Typography align="center" variant="h2">
         The Form Steps/Components below should change when a user hits back or
         submit.
       </Typography>
@@ -42,6 +50,7 @@ export const Form = (props) => {
 //set all of the state to props
 const mapStateToProps = (state) => ({
   formStep: state.form.step,
+  formData: state.form.fields,
 });
 
 //set dispatch actions to props
